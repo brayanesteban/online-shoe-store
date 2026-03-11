@@ -185,3 +185,36 @@ transition:0.3s;
 background:#1ebe5d;
 
 }
+
+#catalogoBtn{
+position:relative;
+}
+
+.burbuja{
+
+position:absolute;
+
+width:7px;
+height:7px;
+
+background: #ADD8E6;
+
+border-radius:50%;
+
+animation:subir 1s linear;
+
+}
+
+@keyframes subir{
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-30px);
+opacity:0;
+}
+
+}
