@@ -1,4 +1,4 @@
-function mostrarQR() {
+function mostrarQRNequi(){
 
 let qr = document.getElementById("qr-nequi");
 
