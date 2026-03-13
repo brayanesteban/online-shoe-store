@@ -3,7 +3,9 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Catálogo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catálogo de zapatos en Tiendas JYJ. Encuentra tu estilo perfecto con comodidad y calidad.">
+<title>Catálogo - Tiendas JYJ</title>
 <link rel="stylesheet" href="estilos.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <script src="script.js" defer></script>
@@ -15,73 +17,77 @@
 <nav>
 <a href="index.html">Inicio</a>
 <a href="catalogo.html">Catálogo</a>
-<a href="contacto.html">Contacto</a>
+<a href="index.html">Ropa</a>
+<a href="index.html">Accesorios</a>
 </nav>
 
 <div class="contenido">
 
-<h2 class="titulo-catalogo">Catálogo</h2>
+<h2 id="titulo-catalogo" class="titulo-catalogo">Catálogo</h2>
 
 <div class="catalogo">
 
 <div class="producto">
-<img src="imagenes/Zapatosazuloscuro.jfif" >
+<img src="imagenes/Zapatosazuloscuro.jfif" alt="Zapatos azules oscuros">
 <p>Precio $90.000</p>
-
-<a class="boton-bancolombia" onclick="mostrarQRNequi()">Pagar</a>
-
-<a href="https://wa.me/573212717692" class="boton-wsp">
-Consultar por WhatsApp
-</a>
+<a href="zapato-azul.html" class="boton-comprar">Comprar</a>
 </div>
 
 <div class="producto">
-<img src="imagenes/Zapatosblancos.jfif">
+<img src="imagenes/Zapatosblancos.jfif" alt="Zapatos blancos">
 <p>Precio $90.000</p>
-
-<a class="boton-bancolombia" onclick="mostrarQRNequi()">Pagar</a>
-
-<a href="https://wa.me/573212717692" class="boton-wsp">
-Consultar por WhatsApp
-</a>
+<a class="boton-comprar" onclick="mostrarQRNequi()">Comprar</a>
 </div>
 
 <div class="producto">
-<img src="imagenes/Zapatosnegros.jfif">
+<img src="imagenes/Zapatosnegros.jfif" alt="Zapatos negros">
 <p>Precio $90.000</p>
-
-<a class="boton-bancolombia" onclick="mostrarQRNequi()">Pagar</a>
-
-<a href="https://wa.me/573212717692" class="boton-wsp">
-Consultar por WhatsApp
-</a>
+<a class="boton-comprar" onclick="mostrarQRNequi()">Comprar</a>
 </div>
 
 <div class="producto">
-<img src="imagenes/Zapatosrojos.jfif">
+<img src="imagenes/Zapatosrojos.jfif" alt="Zapatos rojos">
 <p>Precio $90.000</p>
-
-<a class="boton-bancolombia" onclick="mostrarQRNequi()">Pagar</a>
-
-<a href="https://wa.me/573212717692" class="boton-wsp">
-Consultar por WhatsApp
-</a>
+<a class="boton-comprar" onclick="mostrarQRNequi()">Comprar</a>
 </div>
 
 <div class="producto">
-<img src="imagenes/Zapatosverdes.jfif">
+<img src="imagenes/Zapatosverdes.jfif" alt="Zapatos verdes">
 <p>Precio $90.000</p>
-
-<a class="boton-bancolombia" onclick="mostrarQRNequi()">Pagar</a>
-
-<a href="https://wa.me/573212717692" class="boton-wsp">
-Consultar por WhatsApp
-</a>
+<a class="boton-comprar" onclick="mostrarQRNequi()">Comprar</a>
 </div>
 
 </div>
 </div>
 
-</body>
+<!-- Modal QR Nequi -->
+<div id="modal-qr-nequi" class="modal-qr-nequi">
+  <div class="modal-qr-contenido">
+    <span class="modal-qr-cerrar" onclick="cerrarModalQR()">&times;</span>
+    <h3>Paga con Nequi</h3>
+    <img src="imagenes/qr-nequi.png" alt="QR Nequi" class="modal-qr-img">
+    <p>Escanea el código con tu app Nequi o ingresa el número <b>321 271 7692</b>.<br><span style="color:#b00;font-size:13px;">Recuerda enviar comprobante por WhatsApp.</span></p>
+  </div>
+</div>
+
+<section class="consulta">
+<div class="contenido">
+<h2>¿Dudas? Consulta por WhatsApp</h2>
+<p>Si tienes preguntas sobre tallas, disponibilidad o personalización, contáctanos.</p>
+<div class="consulta-links">
+<a href="https://wa.me/573212717692" class="boton-wsp">WhatsApp 1: 321 271 7692</a>
+<a href="https://wa.me/573117645448" class="boton-wsp">WhatsApp 2: 311 764 5448</a>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-content">
+<h3>Tiendas JYJ</h3>
+<p>WhatsApp: <a href="https://wa.me/573212717692">321 271 7692</a> | <a href="https://wa.me/573117645448">311 764 5448</a></p>
+<p>Dirección: Medellín, Colombia - Calle 95 #71-08</p>
+<p>Instagram: @tiendasjyj (Próximamente)</p>
+</div>
+</footer>
 
 </html>
