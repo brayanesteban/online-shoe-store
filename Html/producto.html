@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="estilos.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <script src="script.js" defer></script>
+
 </head>
 
 <body>
@@ -24,26 +25,62 @@
 
 <div class="producto-detalle">
 	<div class="producto-imagen" style="align-self:flex-start; margin-top:-30px;">
-		<img src="imagenes/Zapatosazuloscuro.jfif" alt="Zapatos azules oscuros">
+		<img id="imagenProducto" src=""> 	
 	</div>
 	<div class="producto-info-flex">
 		<div class="producto-info">
-			<h2>Zapatos Azules Oscuros</h2>
+			<h2 id="nombreProducto"></h2>
 			<p>Estilo elegante para ocasiones formales. Disponibles en tallas 35-42.</p>
-			<p>Precio $90.000</p>
+			<p id="precioProducto"></p>
+			<button class="boton-comprar-grande" onclick="abrirFormulario()">Comprar ahora</button>
 			<p>Una vez pagado, envíanos el comprobante por WhatsApp para confirmar tu pedido.</p>
 			<div class="info-domicilio">
 				<strong>Nota sobre domicilios:</strong><br>
 				El servicio de domicilio tiene un costo adicional y solo está disponible los fines de semana. Consulta el valor y la cobertura antes de realizar tu pago.
 			</div>
 		</div>
-		<div class="qr-container qr-lado">
-			<h3>Método de Pago</h3>
-			<p>Escanea el código QR con la app de Nequi o tu lector de QR para realizar el pago de $90.000.</p>
-			<img src="imagenes/codigoqr.jpeg" alt="Código QR de pago" width="220">
-		</div>
 	</div>
 </div>
+
+<div id="formularioCompra">
+
+<h3>Datos para el pedido</h3>
+
+<label>Nombre</label>
+<input type="text" id="nombreCliente" placeholder="Tu nombre">
+
+<label>Dirección exacta</label>
+<input type="text" id="direccionCliente" placeholder="Ej: Calle 95 #71-08">
+
+<label>Zona de Medellín</label>
+<select id="zona" onchange="calcularDomicilio()">
+
+<option value="">Selecciona tu zona</option>
+
+<option value="3000"> (Castilla, Toscana, Pedregal, Tricentenario)</option>
+
+<option value="5000"> (Centro, Laureles, Aranjuez, Robledo)</option>
+
+<option value="8000">(Belén, Guayabal, El Poblado)</option>
+
+<option value="12000"> (San Antonio de Prado, Palmitas)</option>
+
+</select>
+
+<p>Domicilio: $<span id="precioDomicilio">0</span></p>
+
+<p>Total a pagar: $<span id="precioTotal">90000</span></p>
+
+<button onclick="mostrarQR()">Continuar al pago</button>
+
+</div>
+
+<div id="pagoQR" style="display:none; margin-top:20px;">
+<h3>Paga aquí</h3>
+<img src="imagenes/codigoqr.jpeg" width="220">
+<p>Después de pagar envía el comprobante por WhatsApp.</p>
+</div>
+
 
 </div>
 

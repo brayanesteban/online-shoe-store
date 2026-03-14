@@ -315,7 +315,24 @@ flex-wrap: wrap;
 padding: 10px 20px;
 }
 
+.boton-consulta {
+background: #90ee90;  
+color: white;
+}
+
+
 /* Producto detalle - paginas individuales */
+
+.producto{
+background:white;
+width:230px;
+padding:20px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+text-align:center;
+}
+
 .producto-detalle {
   display: flex;
   gap: 40px;
@@ -323,6 +340,7 @@ padding: 10px 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 
 .producto-info-flex {
   display: flex;
@@ -742,3 +760,153 @@ letter-spacing:2px;
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
+
+#formularioCompra{
+
+background:white;
+max-width:500px;
+margin:40px auto;
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+text-align:left;
+
+}
+
+#formularioCompra h3{
+
+text-align:center;
+font-size:26px;
+margin-bottom:25px;
+color:#333;
+
+}
+
+#formularioCompra label{
+
+font-weight:600;
+color:#444;
+
+}
+
+#formularioCompra input,
+#formularioCompra select{
+
+width:100%;
+padding:10px;
+margin-top:6px;
+margin-bottom:15px;
+
+border-radius:8px;
+border:1px solid #ccc;
+
+font-size:16px;
+
+}
+
+#formularioCompra input:focus,
+#formularioCompra select:focus{
+
+outline:none;
+border-color:#000080;
+
+}
+
+#formularioCompra p{
+
+font-size:18px;
+font-weight:500;
+
+}
+
+#formularioCompra button{
+
+width:100%;
+padding:12px;
+
+background:#000080;
+color:white;
+
+border:none;
+border-radius:10px;
+
+font-size:18px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+#formularioCompra button:hover{
+
+background:#ADD8E6;
+color:black;
+
+}
+
+#pagoQR{
+
+background:white;
+max-width:400px;
+
+margin:30px auto;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+#pagoQR img{
+
+margin-top:15px;
+border-radius:10px;
+
+}
+
+.boton-comprar-grande{
+
+margin-top:15px;
+
+padding:14px 28px;
+
+background:linear-gradient(135deg,#000080,#1e3a8a);
+
+color:white;
+
+border:none;
+
+border-radius:30px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:all 0.3s ease;
+
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+
+}
+
+.boton-comprar-grande:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 20px rgba(0,0,0,0.25);
+
+background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+
+}
+
+
