@@ -49,13 +49,15 @@ const productosData = [
   { id: 2, nombre: "Zapatos Blancos", precio: 90000, imagen: "imagenes/Zapatosblancos.jfif", tipo: "casual" },
   { id: 3, nombre: "Zapatos Negros", precio: 90000, imagen: "imagenes/Zapatosnegros.jfif", tipo: "elegante" },
   { id: 4, nombre: "Zapatos Rojos", precio: 90000, imagen: "imagenes/Zapatosrojos.jfif", tipo: "deportivo" },
-  { id: 5, nombre: "Zapatos Verdes", precio: 90000, imagen: "imagenes/Zapatosverdes.jfif", tipo: "casual" }
+  { id: 5, nombre: "Zapatos Verdes", precio: 90000, imagen: "imagenes/Zapatosverdes.jfif", tipo: "casual" },
 ];
 
 const productos = Object.fromEntries(productosData.map((item) => {
   const producto = crearProducto(item);
   return [String(item.id), producto];
 }));
+
+let productoActual = null;
 
 function mostrarQRNequi() {
   const modal = document.getElementById("modal-qr-nequi");
@@ -179,6 +181,7 @@ function renderDetalleProducto() {
   const id = params.get("producto");
   const producto = productos[id];
   if (!producto) return;
+  productoActual = producto;
 
   const nombre = document.getElementById("nombreProducto");
   const imagen = document.getElementById("imagenProducto");
@@ -208,10 +211,5 @@ window.calcularDomicilio = calcularDomicilio;
 window.mostrarQR = mostrarQR;
 window.mostrarQRNequi = mostrarQRNequi;
 window.cerrarModalQR = cerrarModalQR;
-
-
-
-
-
 
 
