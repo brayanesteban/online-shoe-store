@@ -57,22 +57,24 @@ const productos = Object.fromEntries(productosData.map((item) => {
   return [String(item.id), producto];
 }));
 
+let productoActual = null;
+
 function mostrarQRNequi() {
-  var modal = document.getElementById("modal-qr-nequi");
+  const modal = document.getElementById("modal-qr-nequi");
   if (modal) {
     modal.classList.add("activo");
   }
 }
 
 function cerrarModalQR() {
-  var modal = document.getElementById("modal-qr-nequi");
+  const modal = document.getElementById("modal-qr-nequi");
   if (modal) {
     modal.classList.remove("activo");
   }
 }
 
 window.addEventListener("click", function (event) {
-  var modal = document.getElementById("modal-qr-nequi");
+  const modal = document.getElementById("modal-qr-nequi");
   if (modal && modal.classList.contains("activo") && event.target === modal) {
     cerrarModalQR();
   }
@@ -82,7 +84,7 @@ const catalogoBtn = document.getElementById("catalogoBtn");
 if (catalogoBtn) {
   catalogoBtn.addEventListener("mouseover", function () {
     for (let i = 0; i < 2; i++) {
-      let burbuja = document.createElement("span");
+      const burbuja = document.createElement("span");
       burbuja.classList.add("burbuja");
       burbuja.style.left = Math.random() * 100 + "%";
       burbuja.style.top = Math.random() * 40 + "px";
@@ -94,20 +96,60 @@ if (catalogoBtn) {
 
 function abrirFormulario() {
   const formulario = document.getElementById("formularioCompra");
+  const pagoQR = document.getElementById("pagoQR");
+  const mensajeError = document.getElementById("mensajeError");
+
   if (formulario) formulario.style.display = "block";
+  if (pagoQR) pagoQR.style.display = "none";
+  if (mensajeError) mensajeError.textContent = "";
+}
+
+function obtenerPrecioBase() {
+  return productoActual ? productoActual.precio : 90000;
 }
 
 function calcularDomicilio() {
-  let domicilio = Number(document.getElementById("zona")?.value || 0);
+  const domicilio = Number(document.getElementById("zona")?.value || 0);
   const precioDomicilio = document.getElementById("precioDomicilio");
   const precioTotal = document.getElementById("precioTotal");
 
-  if (precioDomicilio) precioDomicilio.innerText = domicilio;
-  if (precioTotal) precioTotal.innerText = 90000 + domicilio;
+  if (precioDomicilio) precioDomicilio.innerText = domicilio.toLocaleString("es-CO");
+  if (precioTotal) precioTotal.innerText = (obtenerPrecioBase() + domicilio).toLocaleString("es-CO");
+}
+
+function validarFormularioCompra() {
+  const nombre = document.getElementById("nombreCliente")?.value.trim() || "";
+  const direccion = document.getElementById("direccionCliente")?.value.trim() || "";
+  const zona = document.getElementById("zona")?.value || "";
+
+  if (!nombre) {
+    return "Por favor escribe tu nombre.";
+  }
+
+  if (!direccion) {
+    return "Por favor escribe tu dirección exacta.";
+  }
+
+  if (!zona) {
+    return "Selecciona tu zona de Medellín para calcular domicilio.";
+  }
+
+  return "";
 }
 
 function mostrarQR() {
+  const mensajeError = document.getElementById("mensajeError");
   const pagoQR = document.getElementById("pagoQR");
+
+  const error = validarFormularioCompra();
+  if (error) {
+    if (mensajeError) mensajeError.textContent = error;
+    if (pagoQR) pagoQR.style.display = "none";
+    return;
+  }
+
+  if (mensajeError) mensajeError.textContent = "";
+  calcularDomicilio();
   if (pagoQR) pagoQR.style.display = "block";
 }
 
@@ -138,10 +180,13 @@ function renderDetalleProducto() {
   const producto = productos[id];
   if (!producto) return;
 
+  productoActual = producto;
+
   const nombre = document.getElementById("nombreProducto");
   const imagen = document.getElementById("imagenProducto");
   const precio = document.getElementById("precioProducto");
   const descripcion = document.getElementById("descripcionProducto");
+  const precioTotal = document.getElementById("precioTotal");
 
   if (nombre) nombre.textContent = producto.nombre;
   if (imagen) {
@@ -150,11 +195,13 @@ function renderDetalleProducto() {
   }
   if (precio) precio.textContent = "Precio: $" + producto.precio.toLocaleString("es-CO");
   if (descripcion) descripcion.textContent = producto.obtenerDescripcion();
+  if (precioTotal) precioTotal.textContent = producto.precio.toLocaleString("es-CO");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   renderCatalogo();
   renderDetalleProducto();
+  calcularDomicilio();
 });
 
 window.abrirFormulario = abrirFormulario;

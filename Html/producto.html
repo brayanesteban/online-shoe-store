@@ -47,13 +47,13 @@
 <h3>Datos para el pedido</h3>
 
 <label>Nombre</label>
-<input type="text" id="nombreCliente" placeholder="Tu nombre">
+<input type="text" id="nombreCliente" placeholder="Tu nombre" required>
 
 <label>Dirección exacta</label>
-<input type="text" id="direccionCliente" placeholder="Ej: Calle 95 #71-08">
+<input type="text" id="direccionCliente" placeholder="Ej: Calle 95 #71-08" required>
 
 <label>Zona de Medellín</label>
-<select id="zona" onchange="calcularDomicilio()">
+<select id="zona" onchange="calcularDomicilio()" required>
 
 <option value="">Selecciona tu zona</option>
 
@@ -70,6 +70,8 @@
 <p>Domicilio: $<span id="precioDomicilio">0</span></p>
 
 <p>Total a pagar: $<span id="precioTotal">90000</span></p>
+
+<p id="mensajeError" class="mensaje-error"></p>
 
 <button onclick="mostrarQR()">Continuar al pago</button>
 
