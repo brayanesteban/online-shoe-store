@@ -34,20 +34,23 @@
 <h3>Categoría</h3>
 
 <label>
-<input type="checkbox" class="filtro-categoria" value="zapatos"> Zapatos
+<input type="checkbox" class="filtro-opcion" data-filter-group="categoria" value="zapatos"> Zapatos
 </label>
 
 <label>
-<input type="checkbox" class="filtro-categoria" value="camisas"> Camisas
+<input type="checkbox" class="filtro-opcion" data-filter-group="categoria" value="camisas"> Camisas
 </label>
 
+<h3>Tipo</h3>
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="tipo" value="elegante"> Elegante</label>
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="tipo" value="casual"> Casual</label>
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="tipo" value="deportivo"> Deportivo</label>
 
 <h3>Talla</h3>
 
-<label><input type="checkbox" class="filtro-talla" value="37"> 37</label>
-<label><input type="checkbox" class="filtro-talla" value="38"> 38</label>
-<label><input type="checkbox" class="filtro-talla" value="39"> 39</label>
-
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="talla" value="37"> 37</label>
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="talla" value="38"> 38</label>
+<label><input type="checkbox" class="filtro-opcion" data-filter-group="talla" value="39"> 39</label>
 
 <h3>Precio máximo</h3>
 
@@ -58,6 +61,7 @@ min="50000"
 max="200000" 
 step="10000"
 value="200000">
+<p id="valor-precio-maximo">$200.000</p>
 
 </aside>
 
