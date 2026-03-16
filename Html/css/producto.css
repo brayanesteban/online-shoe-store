@@ -1,0 +1,235 @@
+/* ===== CONTENEDOR PRODUCTO ===== */
+
+.producto-detalle{
+display:flex;
+gap:40px;
+align-items:flex-start;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+/* ===== FLEX PRODUCTO ===== */
+
+.producto-info-flex{
+display:flex;
+flex-direction:row;
+gap:32px;
+align-items:flex-start;
+flex-wrap:wrap;
+}
+
+/* ===== IMAGEN PRODUCTO ===== */
+
+.producto-imagen img{
+width:100%;
+max-width:410px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== INFORMACION PRODUCTO ===== */
+
+.producto-info{
+max-width:400px;
+text-align:left;
+}
+
+.producto-info h2{
+font-size:32px;
+margin-bottom:15px;
+color:#333;
+}
+
+.producto-info p{
+font-size:18px;
+margin:8px 0;
+}
+
+/* ===== CONTENEDOR QR ===== */
+
+.qr-container{
+margin-top:20px;
+text-align:center;
+}
+
+.qr-container img{
+border:2px solid #ddd;
+border-radius:10px;
+}
+
+/* ===== FORMULARIO DE COMPRA ===== */
+
+#formularioCompra{
+
+display:none;
+
+background:white;
+
+max-width:500px;
+
+margin:40px auto;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+/* ===== INPUTS FORMULARIO ===== */
+
+#formularioCompra input,
+#formularioCompra select{
+
+width:100%;
+
+padding:10px;
+
+margin-top:6px;
+margin-bottom:15px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+font-size:15px;
+
+}
+
+/* ===== BOTON FORMULARIO ===== */
+
+#formularioCompra button{
+
+width:100%;
+
+padding:12px;
+
+background:#000080;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+#formularioCompra button:hover{
+
+background:#ADD8E6;
+
+color:black;
+
+}
+
+/* ===== SECCION PAGO QR ===== */
+
+#pagoQR{
+
+background:white;
+
+max-width:400px;
+
+margin:30px auto;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+#pagoQR img{
+
+margin-top:15px;
+
+border-radius:10px;
+
+}
+
+/* ===== BOTON COMPRAR GRANDE ===== */
+
+.boton-comprar-grande{
+
+margin-top:15px;
+
+padding:14px 28px;
+
+background:linear-gradient(135deg,#000080,#1e3a8a);
+
+color:white;
+
+border:none;
+
+border-radius:30px;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.boton-comprar-grande:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ===== MODAL QR NEQUI ===== */
+
+.modal-qr-nequi{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.6);
+
+justify-content:center;
+align-items:center;
+
+z-index:1000;
+
+}
+
+.modal-qr-nequi img{
+
+max-width:300px;
+
+border-radius:12px;
+
+}
+
+/* ===== RESPONSIVE PRODUCTO ===== */
+
+@media (max-width:768px){
+
+.producto-detalle{
+flex-direction:column;
+align-items:center;
+}
+
+.producto-info{
+text-align:center;
+}
+
+}
