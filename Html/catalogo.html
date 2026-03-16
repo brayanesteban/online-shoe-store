@@ -26,7 +26,44 @@
 
 <h2 id="titulo-catalogo" class="titulo-catalogo">Catálogo</h2>
 
+<div class="contenedor-catalogo">   
+
+<!-- FILTROS -->
+<aside class="filtros">
+
+<h3>Categoría</h3>
+
+<label>
+<input type="checkbox" class="filtro-categoria" value="zapatos"> Zapatos
+</label>
+
+<label>
+<input type="checkbox" class="filtro-categoria" value="camisas"> Camisas
+</label>
+
+
+<h3>Talla</h3>
+
+<label><input type="checkbox" class="filtro-talla" value="37"> 37</label>
+<label><input type="checkbox" class="filtro-talla" value="38"> 38</label>
+<label><input type="checkbox" class="filtro-talla" value="39"> 39</label>
+
+
+<h3>Precio máximo</h3>
+
+<input 
+type="range" 
+id="filtro-precio"
+min="50000" 
+max="200000" 
+step="10000"
+value="200000">
+
+</aside>
+
+<!-- PRODUCTOS -->
 <div class="catalogo" id="catalogo-grid">
+</div>
 
 </div>
 </div>

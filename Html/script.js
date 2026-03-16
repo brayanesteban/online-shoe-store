@@ -22,7 +22,7 @@ class ZapatoElegante extends Producto {
 class ZapatoCasual extends Producto {
   obtenerDescripcion() {
     return "Diseño cómodo para uso diario. Disponibles en tallas 35-42.";
-  }
+  } 
 }
 
 class ZapatoDeportivo extends Producto {
@@ -44,12 +44,65 @@ function crearProducto(data) {
   }
 }
 
+function crearFiltro(tipo, valor) {
+
+  switch(tipo){
+
+    case "categoria":
+      return (producto) => producto.categoria === valor;
+
+    case "talla":
+      return (producto) => producto.tallas.includes(valor);
+
+    case "precio":
+      return (producto) => producto.precio <= valor;
+
+    default:
+      return () => true;
+
+  }
+}
+
+  function obtenerFiltrosActivos(){
+
+const filtros = [];
+
+document.querySelectorAll(".filtro-categoria:checked").forEach(el=>{
+  filtros.push(crearFiltro("categoria", el.value));
+});
+
+document.querySelectorAll(".filtro-talla:checked").forEach(el=>{
+  filtros.push(crearFiltro("talla", Number(el.value)));
+});
+
+const precio = document.getElementById("filtro-precio");
+
+if(precio){
+  filtros.push(crearFiltro("precio", Number(precio.value)));
+}
+
+return filtros;
+
+}
+
+function filtrarProductos(lista){
+
+const filtros = obtenerFiltrosActivos();
+
+return lista.filter(producto => {
+
+return filtros.every(filtro => filtro(producto));
+
+});
+
+}
+
 const productosData = [
-  { id: 1, nombre: "Zapatos Azules Oscuros", precio: 90000, imagen: "imagenes/Zapatosazuloscuro.jfif", tipo: "elegante" },
-  { id: 2, nombre: "Zapatos Blancos", precio: 90000, imagen: "imagenes/Zapatosblancos.jfif", tipo: "casual" },
-  { id: 3, nombre: "Zapatos Negros", precio: 90000, imagen: "imagenes/Zapatosnegros.jfif", tipo: "elegante" },
-  { id: 4, nombre: "Zapatos Rojos", precio: 90000, imagen: "imagenes/Zapatosrojos.jfif", tipo: "deportivo" },
-  { id: 5, nombre: "Zapatos Verdes", precio: 90000, imagen: "imagenes/Zapatosverdes.jfif", tipo: "casual" },
+  { id: 1, nombre: "Zapatos Azules Oscuros", precio: 90000, imagen: "imagenes/Zapatosazuloscuro.jfif", tipo: "elegante", categoria: "zapatos", tallas: [35, 36, 38, 39, 40, 41, 42] },
+  { id: 2, nombre: "Zapatos Blancos", precio: 90000, imagen: "imagenes/Zapatosblancos.jfif", tipo: "casual", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
+  { id: 3, nombre: "Zapatos Negros", precio: 90000, imagen: "imagenes/Zapatosnegros.jfif", tipo: "elegante", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
+  { id: 4, nombre: "Zapatos Rojos", precio: 90000, imagen: "imagenes/Zapatosrojos.jfif", tipo: "deportivo", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
+  { id: 5, nombre: "Zapatos Verdes", precio: 90000, imagen: "imagenes/Zapatosverdes.jfif", tipo: "casual", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
 ];
 
 const productos = Object.fromEntries(productosData.map((item) => {
@@ -152,15 +205,44 @@ function mostrarQR() {
   if (pagoQR) pagoQR.style.display = "block";
 }
 function renderCatalogo() {
-  const titulo = document.getElementById("titulo-catalogo");
-  if (titulo) titulo.textContent = "Catálogo";
-}
 
-function renderCatalogo() {
-  const titulo = document.getElementById("titulo-catalogo");
-  if (titulo) titulo.textContent = "Catálogo";
-  const contenedor = document.getElementById("catalogo-grid");
-  if (!contenedor) return;
+const titulo = document.getElementById("titulo-catalogo");
+if (titulo) titulo.textContent = "Catálogo";
+
+const contenedor = document.getElementById("catalogo-grid");
+if (!contenedor) return;
+
+contenedor.innerHTML = "";
+
+const listaFiltrada = filtrarProductos(Object.values(productos));
+
+listaFiltrada.forEach((producto) => {
+
+const card = document.createElement("div");
+card.className = "producto";
+
+card.innerHTML = `
+<img src="${producto.imagen}" alt="${producto.nombre}">
+<h3>${producto.nombre}</h3>
+<p>Tallas: ${producto.tallas.join(" • ")}</p>
+<p>Precio $${producto.precio.toLocaleString("es-CO")}</p>
+<a href="producto.html?producto=${producto.id}" class="boton-comprar">Comprar</a>
+`;
+
+contenedor.appendChild(card);
+
+});
+
+}
+document.addEventListener("DOMContentLoaded", function () {
+  renderCatalogo();
+  renderDetalleProducto();
+  calcularDomicilio();
+
+  document.querySelectorAll(".filtros input").forEach(input => {
+    input.addEventListener("change", renderCatalogo);
+  });
+});
 
 contenedor.innerHTML = "";
 
@@ -174,7 +256,6 @@ contenedor.innerHTML = "";
     `;
     contenedor.appendChild(card);
   });
-}
 
 function renderDetalleProducto() {
   const params = new URLSearchParams(window.location.search);
@@ -200,10 +281,42 @@ function renderDetalleProducto() {
 
 }
 
+function actualizarCatalogo() {
+
+const listaFiltrada = filtrarProductos(Object.values(productos));
+
+const contenedor = document.getElementById("catalogo-grid");
+
+contenedor.innerHTML = "";
+
+listaFiltrada.forEach(producto => {
+
+const card = document.createElement("div");
+
+card.className = "producto";
+
+card.innerHTML = `
+<img src="${producto.imagen}" alt="${producto.nombre}">
+<p>${producto.nombre}</p>
+<p>$${producto.precio.toLocaleString("es-CO")}</p>
+<a href="producto.html?producto=${producto.id}" class="boton-comprar">Comprar</a>
+`;
+
+contenedor.appendChild(card);
+
+});
+
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   renderCatalogo();
   renderDetalleProducto();
   calcularDomicilio();
+
+document.querySelectorAll(".filtros input").forEach(input => {
+input.addEventListener("change", actualizarCatalogo);
+});
+
 });
 
 window.abrirFormulario = abrirFormulario;
