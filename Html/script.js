@@ -1,11 +1,14 @@
 console.log("js cargado");
 
 class Producto {
-  constructor(id, nombre, precio, imagen) {
+  constructor(id, nombre, precio, imagen, categoria= "", tallas = [], tipo = "") {
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;
     this.imagen = imagen;
+    this.categoria = categoria;
+    this.tallas = tallas;
+    this.tipo = tipo;
   }
 
   obtenerDescripcion() {
@@ -34,13 +37,13 @@ class ZapatoDeportivo extends Producto {
 function crearProducto(data) {
   switch (data.tipo) {
     case "elegante":
-      return new ZapatoElegante(data.id, data.nombre, data.precio, data.imagen);
+      return new ZapatoElegante(data.id, data.nombre, data.precio, data.imagen, data.categoria, data.tallas, data.tipo);
     case "casual":
-      return new ZapatoCasual(data.id, data.nombre, data.precio, data.imagen);
+      return new ZapatoCasual(data.id, data.nombre, data.precio, data.imagen, data.categoria, data.tallas, data.tipo);
     case "deportivo":
-      return new ZapatoDeportivo(data.id, data.nombre, data.precio, data.imagen);
+      return new ZapatoDeportivo(data.id, data.nombre, data.precio, data.imagen, data.categoria, data.tallas, data.tipo);
     default:
-      return new Producto(data.id, data.nombre, data.precio, data.imagen);
+      return new Producto(data.id, data.nombre, data.precio, data.imagen, data.categoria, data.tallas, data.tipo);
   }
 }
 
@@ -67,11 +70,11 @@ function crearFiltro(tipo, valor) {
 
 const filtros = [];
 
-document.querySelectorAll(".filtro-categoria:checked").forEach(el=>{
+document.querySelectorAll('.filtro-opcion[data-filter-group="categoria"]:checked').forEach((el) => {
   filtros.push(crearFiltro("categoria", el.value));
 });
 
-document.querySelectorAll(".filtro-talla:checked").forEach(el=>{
+document.querySelectorAll('.filtro-opcion[data-filter-group="talla"]:checked').forEach((el) => {
   filtros.push(crearFiltro("talla", Number(el.value)));
 });
 
@@ -103,6 +106,8 @@ const productosData = [
   { id: 3, nombre: "Zapatos Negros", precio: 90000, imagen: "imagenes/Zapatosnegros.jfif", tipo: "elegante", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
   { id: 4, nombre: "Zapatos Rojos", precio: 90000, imagen: "imagenes/Zapatosrojos.jfif", tipo: "deportivo", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
   { id: 5, nombre: "Zapatos Verdes", precio: 90000, imagen: "imagenes/Zapatosverdes.jfif", tipo: "casual", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
+  {id: 6, nombre: "Zapatos blancos colegial", precio: 90000, imagen: "imagenes/Zapatoscolegialblanco.jpeg", tipo: "casual", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] },
+  {id: 7, nombre: "Zapatos negros colegial", precio: 90000, imagen: "imagenes/Zapatosnegroscolegial.jpeg", tipo: "elegante", categoria: "zapatos", tallas: [35, 36, 37, 38, 39, 40, 41, 42] }
 ];
 
 const productos = Object.fromEntries(productosData.map((item) => {
@@ -206,9 +211,6 @@ function mostrarQR() {
 }
 function renderCatalogo() {
 
-const titulo = document.getElementById("titulo-catalogo");
-if (titulo) titulo.textContent = "Catálogo";
-
 const contenedor = document.getElementById("catalogo-grid");
 if (!contenedor) return;
 
@@ -216,15 +218,15 @@ contenedor.innerHTML = "";
 
 const listaFiltrada = filtrarProductos(Object.values(productos));
 
-listaFiltrada.forEach((producto) => {
+listaFiltrada.forEach((producto, index) => {
 
 const card = document.createElement("div");
 card.className = "producto";
+card.style.animationDelay = (index * 0.1) + "s";
 
 card.innerHTML = `
 <img src="${producto.imagen}" alt="${producto.nombre}">
 <h3>${producto.nombre}</h3>
-<p>Tallas: ${producto.tallas.join(" • ")}</p>
 <p>Precio $${producto.precio.toLocaleString("es-CO")}</p>
 <a href="producto.html?producto=${producto.id}" class="boton-comprar">Comprar</a>
 `;
@@ -234,6 +236,7 @@ contenedor.appendChild(card);
 });
 
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   renderCatalogo();
   renderDetalleProducto();
@@ -243,19 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener("change", renderCatalogo);
   });
 });
-
-contenedor.innerHTML = "";
-
-  Object.values(productos).forEach((producto) => {
-    const card = document.createElement("div");
-    card.className = "producto";
-    card.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}">
-      <p>Precio $${producto.precio.toLocaleString("es-CO")}</p>
-      <a href="producto.html?producto=${producto.id}" class="boton-comprar">Comprar</a>
-    `;
-    contenedor.appendChild(card);
-  });
 
 function renderDetalleProducto() {
   const params = new URLSearchParams(window.location.search);
@@ -278,46 +268,8 @@ function renderDetalleProducto() {
   if (precio) precio.textContent = "Precio: $" + producto.precio.toLocaleString("es-CO");
   if (descripcion) descripcion.textContent = producto.obtenerDescripcion();
   if (precioTotal) precioTotal.textContent = producto.precio.toLocaleString("es-CO");
-
 }
 
-function actualizarCatalogo() {
-
-const listaFiltrada = filtrarProductos(Object.values(productos));
-
-const contenedor = document.getElementById("catalogo-grid");
-
-contenedor.innerHTML = "";
-
-listaFiltrada.forEach(producto => {
-
-const card = document.createElement("div");
-
-card.className = "producto";
-
-card.innerHTML = `
-<img src="${producto.imagen}" alt="${producto.nombre}">
-<p>${producto.nombre}</p>
-<p>$${producto.precio.toLocaleString("es-CO")}</p>
-<a href="producto.html?producto=${producto.id}" class="boton-comprar">Comprar</a>
-`;
-
-contenedor.appendChild(card);
-
-});
-
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  renderCatalogo();
-  renderDetalleProducto();
-  calcularDomicilio();
-
-document.querySelectorAll(".filtros input").forEach(input => {
-input.addEventListener("change", actualizarCatalogo);
-});
-
-});
 
 window.abrirFormulario = abrirFormulario;
 window.calcularDomicilio = calcularDomicilio;
