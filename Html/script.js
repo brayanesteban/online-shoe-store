@@ -270,6 +270,30 @@ function renderDetalleProducto() {
   if (precioTotal) precioTotal.textContent = producto.precio.toLocaleString("es-CO");
 }
 
+function renderDestacados() {
+    const contenedor = document.getElementById("productos-destacados");
+    if (!contenedor) return;
+
+    const destacados = productosData.slice(0, 3);
+
+    destacados.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "producto";
+        card.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius:10px;">
+            <h3>${p.nombre}</h3>
+            <p>Precio $${p.precio.toLocaleString("es-CO")}</p>
+            <a href="producto.html?producto=${p.id}" class="boton-comprar" style="background:#000080; padding:10px 20px;">Ver Producto</a>
+        `;
+        contenedor.appendChild(card);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    renderCatalogo();
+    renderDestacados(); 
+});
+
 
 window.abrirFormulario = abrirFormulario;
 window.calcularDomicilio = calcularDomicilio;
