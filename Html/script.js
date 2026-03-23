@@ -274,16 +274,20 @@ function renderDestacados() {
     const contenedor = document.getElementById("productos-destacados");
     if (!contenedor) return;
 
+    contenedor.innerHTML = "";
     const destacados = productosData.slice(0, 3);
 
     destacados.forEach(p => {
         const card = document.createElement("div");
-        card.className = "producto";
+        card.className = "producto-destacado";
         card.innerHTML = `
-            <img src="${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius:10px;">
-            <h3>${p.nombre}</h3>
-            <p>Precio $${p.precio.toLocaleString("es-CO")}</p>
-            <a href="producto.html?producto=${p.id}" class="boton-comprar" style="background:#000080; padding:10px 20px;">Ver Producto</a>
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <div class="destacado-contenido">
+              <span class="destacado-tipo">${p.tipo.toUpperCase()}</span>
+              <h3>${p.nombre}</h3>
+              <p>Precio $${p.precio.toLocaleString("es-CO")}</p>
+              <a href="producto.html?producto=${p.id}" class="boton-ver-producto">Ver producto</a>
+            </div>           
         `;
         contenedor.appendChild(card);
     });
